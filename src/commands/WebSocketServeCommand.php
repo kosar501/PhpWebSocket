@@ -30,7 +30,7 @@ class WebSocketServeCommand
             $loop = EventLoopFactory::create();
 
             // Instantiate the PhpWebSocket handler (Pusher or WebSocketServer)
-            $wsHandler =  new WebSocketServer();
+            $wsHandler = new WebSocketServer();
 
             // Create the PhpWebSocket server
             $webSocket = new ReactSocketServer("$host:$port", $loop);
@@ -61,7 +61,7 @@ class WebSocketServeCommand
 
             // Listen for ZeroMQ messages and use Pusher to broadcast
             $zmqSocket->on('message', function ($message) use ($wsHandler) {
-                    $wsHandler->broadcast($message);
+                $wsHandler->broadcast($message);
             });
 
             // Run the shared event loop
