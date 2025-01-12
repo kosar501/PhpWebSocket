@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Listener</title>
+</head>
+<body>
+<h1>WebSocket Listener</h1>
+<div id="messages" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;">
+    <p><strong>Messages:</strong></p>
+</div>
+
+<script>
+
+    // Create a PhpWebSocket connection in websocket.php host && port
+    const socket = new WebSocket('ws://127.0.0.1:8080');
+
+    // Display a message when the PhpWebSocket connection is opened
+    socket.onopen = function () {
+        console.log('WebSocket connection established.');
+
+        // Send the subscribe message in the correct format
+        socket.send(JSON.stringify({
+            event: 'subscribe',
+            data: { topic: 'news' } // Subscribe to the 'news' topic
+        }));
+    };
+
+
+    socket.addEventListener('message', function (event) {
+        console.log('Raw WebSocket message:', event.data);
+    });
+
+   // Handle incoming messages
+    socket.onmessage = function(event) {
+        const message = JSON.parse(event.data);
+        console.log('Received message:', message);
+
+        // Append the message to the messages div
+        const messagesDiv = document.getElementById('messages');
+        const newMessage = document.createElement('p');
+        newMessage.textContent = `Topic: ${message.topic}, Content: ${message.content}`;
+        messagesDiv.appendChild(newMessage);
+    };
+
+    // Handle errors
+    socket.onerror = function (error) {
+        console.error('WebSocket error:', error);
+    };
+
+    // Handle PhpWebSocket closure
+    socket.onclose = function () {
+        console.log('WebSocket connection closed.');
+    };
+</script>
+</body>
+</html>

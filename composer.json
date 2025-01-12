@@ -1,0 +1,34 @@
+{
+  "name": "kosar501/phpwebsocket",
+  "type": "library",
+  "description": "a simple package interaction websocket server and client",
+  "license": "MIT",
+  "keywords": [
+    "php",
+    "websocket",
+    "socket"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Kosar501\\PhpWebSocket\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.4",
+    "cboden/ratchet": "^0.4.4",
+    "vlucas/phpdotenv": "^5.6",
+    "symfony/console": "^5.4",
+    "react/zmq": "^0.4.0",
+    "ext-json": "*",
+    "ext-zmq": "*",
+    "react/socket": "^1.16"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "authors": [
+    {
+      "name": "Kosar Ahmadi",
+      "email": "kosar501.75@gmail.com"
+    }
+  ]
+}
