@@ -16,7 +16,7 @@ that processes messages from a Redis queue.
 ### Step 1: Clone the Repository
 Clone the repository to your local machine:
 ```bash
-git clone https://your-repository-url.git
+git clone https://github.com/kosar501/PhpWebSocket.git
 cd your-project-folder
 ```
 
