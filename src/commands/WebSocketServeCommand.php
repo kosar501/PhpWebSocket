@@ -26,14 +26,11 @@ class WebSocketServeCommand
             }
 
 
-            // Check if Pusher should be used
-            $usePusher = config('pusher.enabled', false);
-
             // Create the shared event loop
             $loop = EventLoopFactory::create();
 
             // Instantiate the PhpWebSocket handler (Pusher or WebSocketServer)
-            $wsHandler = $usePusher ? new Pusher() : new WebSocketServer();
+            $wsHandler =  new WebSocketServer();
 
             // Create the PhpWebSocket server
             $webSocket = new ReactSocketServer("$host:$port", $loop);
@@ -63,10 +60,7 @@ class WebSocketServeCommand
             echo "ZeroMQ server running at $zmqEndpoint\n";
 
             // Listen for ZeroMQ messages and use Pusher to broadcast
-            $zmqSocket->on('message', function ($message) use ($wsHandler, $usePusher) {
-                if ($usePusher)
-                    $wsHandler->onBlogEntry($message);
-                else
+            $zmqSocket->on('message', function ($message) use ($wsHandler) {
                     $wsHandler->broadcast($message);
             });
 
