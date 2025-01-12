@@ -2,10 +2,7 @@
 
 ## Overview
 
-This project provides a simple WebSocket server implementation in PHP, 
-designed to interact with Redis for message queuing. 
-It consists of a WebSocket server that communicates with clients and a Redis consumer 
-that processes messages from a Redis queue.
+Real-time messaging platform utilizing WebSocket for bidirectional communication between clients and a ZeroMQ-powered backend for scalable, asynchronous message distribution. This project enables efficient and low-latency communication across multiple connected clients, with ZeroMQ handling high-throughput messaging and WebSocket ensuring real-time updates in a responsive web interface.
 
 **WebSocket Server**: Listens for WebSocket connections and broadcasts messages to connected clients.
 
