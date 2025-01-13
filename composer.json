@@ -23,7 +23,7 @@
     "ext-zmq": "*",
     "react/socket": "^1.16"
   },
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "prefer-stable": true,
   "authors": [
     {
