@@ -4,11 +4,35 @@
 
 Real-time messaging platform utilizing WebSocket for bidirectional communication between clients and a ZeroMQ-powered backend for scalable, asynchronous message distribution. This project enables efficient and low-latency communication across multiple connected clients, with ZeroMQ handling high-throughput messaging and WebSocket ensuring real-time updates in a responsive web interface.
 
+
 **WebSocket Server**: Listens for WebSocket connections and broadcasts messages to connected clients.
 
 ---
 
-## Installation
+## Dependencies
+* Install ZeroMQ Dependencies
+```bash
+sudo apt-get update
+sudo apt-get install -y libzmq3-dev php7.4-dev pkg-config
+cd /etc
+sudo git clone https://github.com/mkoppanen/php-zmq.git
+cd php-zmq
+sudo phpize
+sudo ./configure
+sudo make
+sudo make install
+echo "extension=zmq.so" | sudo tee /etc/php/7.4/mods-available/zmq.ini
+sudo phpenmod zmq
+
+```
+to check you can use ```bash php -m | grep zmq```
+
+## Installation 1:
+run this on terminal
+```bash
+php7.4 path-to-the-composer  require kosar501/phpwebsocket:dev-main --prefer-stable
+```
+## Installation 2:
 
 ### Step 1: Clone the Repository
 Clone the repository to your local machine:
@@ -21,10 +45,7 @@ cd your-project-folder
 ```bash
 composer install
 ```
-### Step 2: Install Dependencies
-```bash
-composer install
-```
+
 ## Running the Server
 There are two main components in the system: the WebSocket server and the Redis queue consumer.
 You can run both components as separate processes, and they will be managed using Supervisor.
@@ -86,3 +107,8 @@ socket.onmessage = function(event) {
     // Now you can access the message properties like message.action, message.username, etc.
 };
 ```
+
+### Dependencies:
+you will need `ZMQ` requirements on your server
+you can change websocket and ZMQ port from `src/configs`
+by default this project will run websocket server on port 8080 and ZMQ on port 5555
